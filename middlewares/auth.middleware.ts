@@ -18,7 +18,8 @@ export const requireAuth = async (
     if(user) {
       req["tokenVerify"] = user.token;
     }
+    console.log("chạy vào request Authen")
   }
-  console.log("chạy vào request Authen")
+  
   next();
 }

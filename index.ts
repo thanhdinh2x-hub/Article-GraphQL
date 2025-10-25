@@ -33,7 +33,7 @@ const startServer = async () => {   // phải tạo thành hàm thì server.star
     const apolloServer = new ApolloServer({ //tạo một GraphQL server.
         typeDefs,//mô tả schema (kiểu dữ liệu, query...). // ghi typeDefs: typeDefs, cũng đc vì nếu giống tên biến thì ghi 1 thôi
         resolvers,//các hàm xử lý thực tế.
-        introspection:true, //để gợi ý code trong trang graphql
+        introspection: true, //để gợi ý code trong trang graphql
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],//mở rộng hành vi của server. // Đây là plugin giúp Apollo biết khi nào HTTP server (Express) đóng lại → Apollo cũng tự “dọn dẹp” (drain) các kết nối WebSocket hoặc request đang chờ.//Nếu không có plugin này, khi bạn tắt server, Apollo có thể chưa đóng hết kết nối → gây lỗi shutdown không gọn.
     });
 
@@ -41,7 +41,14 @@ const startServer = async () => {   // phải tạo thành hàm thì server.star
 
     app.use(
         '/graphql', //tất cả request gửi đến /graphql mới đi qua chuỗi middleware này.
-        cors(), //cho phép các domain khác gọi API của bạn.
+        cors({
+            origin: [
+                "https://studio.apollographql.com",
+                "https://article-graph-ql-psi.vercel.app",
+                "http://localhost:4000",
+            ],
+            credentials: true,
+        }), //cho phép các domain khác gọi API của bạn.
         express.json(), //parse JSON trong body request (vì GraphQL gửi JSON). //Nếu bạn không có express.json(), Express không hiểu body là JSON, nên Apollo sẽ không nhận được query → lỗi 
         expressMiddleware(apolloServer, { //expressMiddleware() → chuyển request sang Apollo xử lý. //biến Apollo Server thành middleware của Express — tức là Apollo sẽ xử lý các request GraphQL tại đây.
             context: async ({ req }) => ({ ...req }) //Apollo gọi context() → tạo ra context chứa thông tin request.//Apollo đọc query, gọi resolver tương ứng → resolver có thể truy cập context để biết://ai đang gửi request,//token, headers, v.v.

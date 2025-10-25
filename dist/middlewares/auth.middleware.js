@@ -24,8 +24,8 @@ const requireAuth = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         if (user) {
             req["tokenVerify"] = user.token;
         }
+        console.log("chạy vào request Authen");
     }
-    console.log("chạy vào request Authen");
     next();
 });
 exports.requireAuth = requireAuth;

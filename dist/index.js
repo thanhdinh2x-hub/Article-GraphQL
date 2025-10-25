@@ -37,7 +37,14 @@ const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
         plugins: [(0, drainHttpServer_1.ApolloServerPluginDrainHttpServer)({ httpServer })],
     });
     yield apolloServer.start();
-    app.use('/graphql', (0, cors_1.default)(), express_1.default.json(), (0, express5_1.expressMiddleware)(apolloServer, {
+    app.use('/graphql', (0, cors_1.default)({
+        origin: [
+            "https://studio.apollographql.com",
+            "https://article-graph-ql-psi.vercel.app",
+            "http://localhost:4000",
+        ],
+        credentials: true,
+    }), express_1.default.json(), (0, express5_1.expressMiddleware)(apolloServer, {
         context: (_a) => __awaiter(void 0, [_a], void 0, function* ({ req }) { return (Object.assign({}, req)); })
     }));
     yield new Promise((resolve) => {
