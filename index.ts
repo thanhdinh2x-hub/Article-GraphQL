@@ -28,7 +28,7 @@ const startServer = async () => {   // phải tạo thành hàm thì server.star
 
 
     //GraphQL API
-    // app.use("/graphql", requireAuth); // sau khi đi vào cổng /graphql thì chạy qua middle authen luôn
+    app.use("/graphql", requireAuth); // sau khi đi vào cổng /graphql thì chạy qua middle authen luôn
     // Set up Apollo Server
     const apolloServer = new ApolloServer({ //tạo một GraphQL server.
         typeDefs,//mô tả schema (kiểu dữ liệu, query...). // ghi typeDefs: typeDefs, cũng đc vì nếu giống tên biến thì ghi 1 thôi
