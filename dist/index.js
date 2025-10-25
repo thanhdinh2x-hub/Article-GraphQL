@@ -22,14 +22,12 @@ const http_1 = __importDefault(require("http"));
 const cors_1 = __importDefault(require("cors"));
 const index_typeDefs_1 = require("./typeDefs/index.typeDefs");
 const index_resolver_1 = require("./resolvers/index.resolver");
-const auth_middleware_1 = require("./middlewares/auth.middleware");
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     dotenv_1.default.config();
     (0, database_1.connect)();
     const app = (0, express_1.default)();
     const httpServer = http_1.default.createServer(app);
     const port = process.env.PORT;
-    app.use("/graphql", auth_middleware_1.requireAuth);
     const apolloServer = new server_1.ApolloServer({
         typeDefs: index_typeDefs_1.typeDefs,
         resolvers: index_resolver_1.resolvers,
