@@ -59,7 +59,7 @@ export const resolversUser = {
 
         return {
           code: 200,
-          message: "Thành công!",
+          message: "dky Thành công!",
           id: newUser.id,
           fullName: newUser.fullName,
           email: newUser.email,
@@ -91,7 +91,7 @@ export const resolversUser = {
 
       return {
         code: 200,
-        message: "Thành công!",
+        message: "Login Thành công!",
         id: infoUser.id,
         fullName: infoUser.fullName,
         email: infoUser.email,

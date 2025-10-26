@@ -69,7 +69,7 @@ exports.resolversUser = {
                 yield newUser.save();
                 return {
                     code: 200,
-                    message: "Thành công!",
+                    message: "dky Thành công!",
                     id: newUser.id,
                     fullName: newUser.fullName,
                     email: newUser.email,
@@ -97,7 +97,7 @@ exports.resolversUser = {
             }
             return {
                 code: 200,
-                message: "Thành công!",
+                message: "Login Thành công!",
                 id: infoUser.id,
                 fullName: infoUser.fullName,
                 email: infoUser.email,
